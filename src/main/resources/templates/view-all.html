@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+	<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+		<title>View All</title>
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+		<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+		
+</head>
+	<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<div class="container-fluid">
+	
+	<div th:each="dealer : ${listDealer}">
+		<h3 th:text="'Dealer ID ' + ${dealer.id}"></h3>
+
+		<h5 th:text="'Alamat Dealer = ' + ${dealer.alamat}"></h5>
+		<h5 th:text="'Telepon (+62) = ' + ${dealer.noTelp}"></h5>
+
+		<a th:href="@{/dealer/view/?dealerId={id}(id=${dealer.id})}">Info Dealer</a>
+		<br>
+		<a th:href="@{/dealer/delete/{id}(id=${dealer.id})}">Hapus Dealer</a>
+		<br>
+		<a th:href="@{/dealer/update/{id}(id=${dealer.id})}">Perbaharui Dealer</a>
+		
+		<div class="col-xs-5">
+		<table class="table-bordered table-striped	">
+		<thead>
+			<tr>
+				<td>Brand</td>
+				<td>Type</td>
+				<td>Price</td>
+				<td>Amount</td>
+			</tr>
+		<thead/>
+		<tbody>
+			<div th:each="car : ${dealer.listCar}">
+				<tr>
+					<td th:text="${car.brand}"></td>
+					<td th:text="${car.type}"></td>
+					<td th:text="${car.price}"></td>
+					<td th:text="${car.amount}"></td>
+				</tr>
+				
+			</div>
+		</tbody>
+		</table>
+		</div>
+		<br>
+	</div>
+	<td><a th:href="@{/}">Kembali</a></td>
+	</div>
+	</body>
+	</html>
